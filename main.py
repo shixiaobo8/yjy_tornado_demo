@@ -22,7 +22,8 @@ class LoginHandler(tornado.web.RequestHandler):
         if username == 'admin' and password=='wuyingbo56':
             fields = dict()
             with open('/root/filed.json') as f:
-                data = f.read()
+                data = json.loads(f.read())
+            fields = data
             self.render('inter_center.html',fields=fields)
         else:
             self.write("用户名或密码不正确")
