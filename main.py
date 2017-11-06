@@ -6,6 +6,8 @@ import tornado.web
 import os,stat
 import tornado.autoreload
 import hashlib
+import json
+
 
 class LoginHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
@@ -14,36 +16,14 @@ class LoginHandler(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
         url = self.get_login_url()
         list = [1,2,3,4,5]
-        upload_path = os.path.join(os.path.dirname(__file__), 'files')
-        if not os.path.exists(upload_path):
-            os.makedirs(upload_path)
-            os.chmod(upload_path,stat.S_IRWXU|stat.S_IRGRP|stat.S_IROTH)
         username = self.get_argument("username")
         password = self.get_argument("password")
-        files = self.request.files['file']
-        file_name = ''
-        upload_status = 0
-        for f in files:
-            file_name = f['filename']
-            upload_status = self.save_file(f['body'],upload_path)
-        res = {
-                "code":200,
-                'data': {
-                    "username":username,
-                    "password":password,
-                    "文件名:":file_name,
-                    "文件上传状态:":upload_status,
-                    "request_url":url,
-                    "参数0":list
-                }
-        }
-        self.write(res)
+        res = {"code":200, 'data': 'ok'}
+        if username == 'admin' and password=='wuyingbo56':
+            self.redirect('/inter_center')
+        else:
+            self.write(json.dumps({"用户名或密码不正确"}))
 
-    def save_file(self,file_contents,upload_path):
-        status = 1
-        with open(upload_path,"wb") as f:
-            f.write(file_contents)
-        return status
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
@@ -53,6 +33,7 @@ class MainHandler(tornado.web.RequestHandler):
 
     def post(self, *args, **kwargs):
         self.write('aaaa')
+
 
 class wxTokenHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
