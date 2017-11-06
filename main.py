@@ -24,6 +24,7 @@ class LoginHandler(tornado.web.RequestHandler):
             with open('/root/filed.json') as f:
                 data = json.loads(f.read())
             fields = data
+            self.write(data)
             self.render('inter_center.html',fields=fields)
         else:
             self.write("用户名或密码不正确")
