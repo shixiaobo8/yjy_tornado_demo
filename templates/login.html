@@ -60,16 +60,6 @@
                     <label>Password</label>
                     <input class="form-control" id="id_password" maxlength="100" name="password" placeholder="密码" type="password" />
                 </div>
-                <div class="form-group">
-                    <input type='file' name='file'/>
-                </div>
-                <div class="form-group">
-                    <label>验证码</label>
-                    <input autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="id_captcha_1" name="captcha_1" type="text" />
- <input id="id_captcha_0" name="captcha_0" type="hidden" value="2f42a226a1c3f57480bfeb03208926590a78c377" />
- 
-<img src="/captcha/image/2f42a226a1c3f57480bfeb03208926590a78c377/" alt="captcha" class="captcha" />
-                </div>
             
             <div id="captcha_status" style="color:red"></div>
             
@@ -85,12 +75,9 @@
     </div>
 </body>
 <hr/>
-{{ dict['code'] }}
-{{ dict['data'] }}
-<hr/>
-<ul>
-    {% for num in list %}
-    <li>{{num}}</li>
-    {% end %}
-</ul>
+{#<ul>#}
+{#    {% for num in list %}#}
+{#    <li>{{num}}</li>#}
+{#    {% end %}#}
+{#</ul>#}
 </html>
