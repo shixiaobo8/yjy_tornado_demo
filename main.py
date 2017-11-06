@@ -15,16 +15,14 @@ class LoginHandler(tornado.web.RequestHandler):
 
     def post(self, *args, **kwargs):
         url = self.get_login_url()
-        list = [1,2,3,4,5]
         username = self.get_argument("username")
         password = self.get_argument("password")
         res = {"code":200, 'data': 'ok'}
         if username == 'admin' and password=='wuyingbo56':
             fields = dict()
             with open('/root/filed.json') as f:
-                data = f.readlines()
+                data = json.loads(f.readlines()[0])
             fields = data
-            self.write(data)
             self.render('inter_center.html',fields=fields)
         else:
             self.write("用户名或密码不正确")
