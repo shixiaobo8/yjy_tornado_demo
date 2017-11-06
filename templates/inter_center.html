@@ -51,7 +51,7 @@
     <div>
         <h3>字段列表</h3>
         {% for field in fields %}
-            <div><span>{{field}}:</span><span>{{  fields[{{field}}] }}</span></div>
+            <div><span>{{field}}:</span><span>{{  fields['{{field}}'] }}</span></div>
         {% end %}
         <p>添加字段:</p>
 
