@@ -7,7 +7,7 @@
     <title></title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" type=text/css href='{{ static_url("css/bootstrap.min.css")}}'>
+    <link rel="stylesheet" type=text/css href='{{ static_url("css/bootstrap.min.css") }}'>
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,45 +17,53 @@
 </head>
 <body>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src='{{ static_url("js/jquery-3.1.1.min.js")}}'></script>
-<script src='{{  static_url("js/highcharts.js")}}'></script>
+<script src='{{ static_url("js/jquery-3.1.1.min.js") }}'></script>
+<script src='{{ static_url("js/highcharts.js") }}'></script>
 <!-- <script src='/static/js/ajax.js' ></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src='{{ static_url("js/bootstrap.min.js")}}'></script>
-<script src='{{  static_url('js/jquery_file_download.js')}}'></script>
+<script src='{{ static_url("js/bootstrap.min.js") }}'></script>
+<script src='{{ static_url('js/jquery_file_download.js') }}'></script>
 <div class="bs-example" data-example-id="nav-tabs-with-dropdown" style='background-color:#FFF8D2;font-color:red;'>
-    <img src="{{static_url('image/banner.jpg')}}">
+    <img src="{{ static_url('image/banner.jpg') }}">
 </div>
 
 <div id="privi_check"></div>
 
-    <style type="text/css">
-        .container {
-            padding-right: 35px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
+<style type="text/css">
+    .container {
+        padding-right: 35px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
 
-        .login {
-            width: 18%;
-            margin-left: 550px;
-            margin-right: auto;
-        }
+    .login {
+        width: 18%;
+        margin-left: 550px;
+        margin-right: auto;
+    }
 
-        input {
-            width:: 10%;
-        }
-    </style>
-    <!-- 接口web控制台管理 -->
-    <div>
-        <h3>字段列表</h3>
-        {% for field in fields %}
-            <div><span>{{field}}:</span><span>{{  fields['{{field}}'] }}</span></div>
+    input {
+        width:: 10%;
+    }
+</style>
+<!-- 接口web控制台管理 -->
+<div>
+    <h3>字段列表</h3>
+    <table style="width: 800px;height: 800px;border: 1px solid #a94442;">
+        <tr style="align-content: center;">
+            <th>字段名称</th>
+            <th>值</th>
+        </tr>
+        {% for d in data['data'] %}
+        <tr>
+            <td><span>{{ d[0] }}</span>&nbsp;&nbsp;&nbsp;<span>{{ d[1] }}</span></td>
+        </tr>
         {% end %}
-        <p>添加字段:</p>
-
-    </div>
+    </table>
+    {#        <p>添加字段:</p>#}
+    {#        {{ json_encode(data) }}#}
+</div>
 </body>
 <hr/>
 </html>
