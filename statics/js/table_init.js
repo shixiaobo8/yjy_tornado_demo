@@ -238,12 +238,28 @@ $(document).ready(function(){
                 $remind.html(' <i class="icon icon-info-sign">字段名不能为空!</i>');
                 return;
             }
-            if(/(^\s+)|(\s+$)/g.test(name)){
+            else if(/(^\s+)|(\s+$)/g.test(key)){
                 $remind.html(' <i class="icon icon-info-sign">字段名不能输入空格!</i>');
                 return;
             }
-            if(key.length>20){
+            else if(key.length>20){
                 $remind.html(' <i class="icon icon-info-sign">字段名不能超过20个字符!</i>');
+                return;
+            }
+            else if(value==''){
+                $remind.html(' <i class="icon icon-info-sign">字段值不能为空!</i>');
+                return;
+            }
+            else if(/(^\s+)|(\s+$)/g.test(value)){
+                $remind.html(' <i class="icon icon-info-sign">字段值不能输入空格!</i>');
+                return;
+            }
+            else if(value.length>20){
+                $remind.html(' <i class="icon icon-info-sign">字段值不能超过20个字符!</i>');
+                return;
+            }
+            else{
+                $remind.html(' <i class="icon icon-info-sign">正在新建提交数据....</i>');
                 return;
             }
   //博主封装的ajax方法，详见我另外一篇博客   http://blog.csdn.net/u010543785/article/details/52366495
