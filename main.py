@@ -7,7 +7,9 @@ import os,stat
 import tornado.autoreload
 import hashlib
 import json
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 class LoginHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
@@ -19,7 +21,7 @@ class LoginHandler(tornado.web.RequestHandler):
         password = self.get_argument("password")
         data = dict()
         if username == 'admin' and password=='wuyingbo56':
-            with open('/root/filed.json') as f:
+            with open(self.application.settings['field_files']) as f:
                 # data = eval(f.readlines()[0])
                 data = f.readlines()
             # data_k = data.keys()
@@ -59,7 +61,8 @@ class gameIntersHandler (tornado.web.RequestHandler):
 
 class tableTestHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
-            with open('/root/filed.json') as f:
+            file = self.application.settings['field_files']
+            with open(file) as f:
                 data = f.readlines()
             res = dict()
             temp = []
@@ -73,23 +76,62 @@ class tableTestHandler(tornado.web.RequestHandler):
 class interFeildDeleteHandler(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
             key = self.get_argument('key',default=None)
-            if key:
-                self.write(key)
+            value = self.get_argument('value',default=None)
+            if key and value:
+                k_f = "'key':'" + key + "'"
+                new_f = "{'key':'" + key + "','value':'" + value+"'}"
+                with open(self.application.settings['field_files']) as f:
+                    data = f.readlines()
+                if k_f in ''.join(data):
+                    self.finish({'code':202,'data':'对不起,已存在相同的字段和值'})
+                else:
+                    with open(self.application.settings['field_files'],'a+') as f:
+                        f.write('\n')
+                        f.write(new_f)
+                    self.finish({'code':200,'data':'保存成功'})
+            else:
+                self.finish({'code':500,'data':'参数错误!'})
 
 
 
 class interFeildSaveHandler(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
             key = self.get_argument('key',default=None)
-            if key:
-                self.write(key)
+            value = self.get_argument('value',default=None)
+            if key and value:
+                k_f = "'key':'" + key + "'"
+                new_f = "{'key':'" + key + "','value':'" + value+"'}"
+                with open(self.application.settings['field_files']) as f:
+                    data = f.readlines()
+                if k_f in ''.join(data):
+                    self.finish({'code':202,'data':'对不起,已存在相同的字段和值'})
+                else:
+                    with open(self.application.settings['field_files'],'a+') as f:
+                        f.write('\n')
+                        f.write(new_f)
+                    self.finish({'code':200,'data':data,'k':k_f})
+            else:
+                self.finish({'code':500,'data':'参数错误!'})
 
 
 class interFeildAddHandler(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
             key = self.get_argument('key',default=None)
-            if key:
-                self.write(key)
+            value = self.get_argument('value',default=None)
+            if key and value:
+                k_f = "'key':'" + key + "'"
+                new_f = "{'key':'" + key + "','value':'" + value+"'}"
+                with open(self.application.settings['field_files']) as f:
+                    data = f.readlines()
+                if k_f in ''.join(data):
+                    self.finish({'code':202,'data':'对不起,已存在相同的字段和值'})
+                else:
+                    with open(self.application.settings['field_files'],'a+') as f:
+                        f.write('\n')
+                        f.write(new_f)
+                    self.finish({'code':200,'data':data,'k':k_f})
+            else:
+                self.finish({'code':500,'data':'参数错误!'})
 
 
 
@@ -130,6 +172,8 @@ application = tornado.web.Application(
     default_host='localhost',
     template_path=os.path.join(os.path.dirname(__file__),"templates"),
     static_path=os.path.join(os.path.dirname(__file__), "statics"),
+    # field_files='/root/filed.json',C:/Users/Administrator/Desktop
+    field_files='/root/filed.json',
     static_url_prefix = "/s/",
     **settings
 )
