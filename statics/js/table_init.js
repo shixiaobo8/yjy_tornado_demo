@@ -260,7 +260,6 @@ $(document).ready(function(){
             }
             else{
                 $remind.html(' <i class="icon icon-info-sign">正在新建提交数据....</i>');
-                return;
             }
   //博主封装的ajax方法，详见我另外一篇博客   http://blog.csdn.net/u010543785/article/details/52366495
   $.postJSON(baseUrl+"interFeildAdd",'{"key":"'+key+'","value":"'+value+'"}',function(data){
