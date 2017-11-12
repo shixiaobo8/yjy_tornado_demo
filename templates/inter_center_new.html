@@ -1,68 +1,68 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <title></title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type=text/css href='{{ static_url("css/bootstrap.min.css")}}'>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" type=text/css href='{{ static_url("css/bootstrap.min.css")}}'>
 
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src='{{ static_url("js/jquery-3.1.1.min.js")}}'></script>
-<script src='{{  static_url("js/highcharts.js")}}'></script>
-<!-- <script src='/static/js/ajax.js' ></script> -->
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src='{{ static_url("js/bootstrap.min.js")}}'></script>
-<script src='{{  static_url('js/table_init.js')}}'></script>
-        <script src="{{  static_url('js/bootstrap-table.js')}}"></script>
-    <link type="text/css" href='{{  static_url("css/bootstrap-table.css")}}' rel="stylesheet" />
-    <script src="{{  static_url('js/bootstrap-table-zh-CN.js')}}"></script>
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src='{{ static_url("js/jquery-3.1.1.min.js")}}'></script>
+        <!-- <script src='/static/js/ajax.js' ></script> -->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src='{{ static_url("js/bootstrap.min.js")}}'></script>
+        <script src='{{ static_url("js/bootbox.min.js")}}'></script>
+        <script src='{{  static_url("js/table_init.js")}}'></script>
+        <script src = "{{  static_url('js/bootstrap-table.js')}}" ></script>
+        <link type="text/css" href='{{  static_url("css/bootstrap-table.css")}}' rel="stylesheet"/>
+        <script src="{{  static_url('js/bootstrap-table-zh-CN.js')}}"></script>
         <script src="{{  static_url('js/bootstrap-table-editable.js')}}"></script>
-         <script src="{{  static_url('js/bootstrap-editable.js')}}"></script>
-        <link href="{{  static_url('css/bootstrap-editable.css')}}" rel="stylesheet" />
-</head>
+        <script src="{{  static_url('js/bootstrap-editable.js')}}"></script>
+        <link href="{{  static_url('css/bootstrap-editable.css')}}" rel="stylesheet"/>
+    </head>
 <body>
 <section class="panel">
-                        <header class="panel-heading">
-                            接口字段数据列表
-                        </header>
-                        <div id="toolbar" style="margin: 10px">
-                            <section class="panel">
-                                <div class="panel-body">
-                                    <form class="form-inline">
-                                        <button id="remove" class="btn btn-danger" disabled>
-                                            <i class="glyphicon glyphicon-trash"></i> 批量删除
-                                        </button>
-                                        <div class="form-group">
-                                            <input  class="form-control" id="keyInp" placeholder="输入字段名称" style="display: none">
-                                        </div>
-                                        <div class="form-group"  >
-                                             <input  class="form-control" id="valueInp" placeholder="输入字段值" style="display: none">
-                                        </select>
-                                        </div>
-                                        <a id="add" class="btn btn-success">
-                                            <i class="glyphicon glyphicon-plus"></i> 新建
-                                        </a>
-                                        <a id="cancel" class="btn btn-warning" style="display:none">
-                                            <i class="icon icon-remove-circle">取消</i>
-                                        </a>
-                                        <span class="remind"></span>
-                                    </form>
-                                </div>
-                            </section>
-                        </div>
-                        <table id="interFields">
-                        </table>
-                    </section>
+    <header class="panel-heading">
+        接口字段数据列表
+    </header>
+    <div id="toolbar" style="margin: 10px">
+        <section class="panel">
+            <div class="panel-body">
+                <form class="form-inline">
+                    <button id="remove" class="btn btn-danger" disabled>
+                        <i class="glyphicon glyphicon-trash"></i> 批量删除
+                    </button>
+                    <div class="form-group">
+                        <input class="form-control" id="keyInp" placeholder="输入字段名称" style="display: none">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="valueInp" placeholder="输入字段值" style="display: none">
+                        </select>
+                    </div>
+                    <a id="add" class="btn btn-success">
+                        <i class="glyphicon glyphicon-plus"></i> 新建
+                    </a>
+                    <a id="cancel" class="btn btn-warning" style="display:none">
+                        <i class="icon icon-remove-circle">取消</i>
+                    </a>
+                    <span class="remind"></span>
+                </form>
+            </div>
+        </section>
+    </div>
+    <table id="interFields">
+    </table>
+</section>
 </body>
-{#</html>#}
+{#
+</html>#}

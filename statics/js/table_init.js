@@ -192,33 +192,54 @@ var ButtonInit = function () {
 // 行内编辑保存删除
 window.operateEvents = {
     'click .save': function (e, value, row, index) {
-        if (row['0'] == undefined || row['0'] == true){
+        if (row['0'] == undefined || row['0'] == true) {
             alert("亲,接口字段和原来重复了,未发现该字段有变化！！");
             location.reload();
-        }else{
+        } else {
             $.ajax({
                 type: "post",
                 data: row,
                 url: '/interFeildSave',
                 success: function (data) {
-                    alert(data['data']);
+                    alert(data['mess']);
+                    location.reload();
                 }
             })
         }
     },
     'click .remove': function (e, value, row, index) {
-        $.ajax({
-            type: "post",
-            data: row,
-            url: '/interFeildDelete',
-            success: function (data) {
-                alert('删除成功');
-                $('#table').bootstrapTable('remove', {
-                    field: 'Id',
-                    values: [row.Id]
-                });
-            }
-        });
+        bootbox.confirm(
+            {
+                message: "确认要删除" + JSON.stringify(row) +"吗?",
+                buttons: {
+                    confirm: {
+                        label: '确认'
+                    },
+                    cancel: {
+                        label: '取消'
+                    }
+                },
+                callback: function (result) {
+                    // 返回 true  或者false
+                    if (result) {
+                        $.ajax({
+                            type: "post",
+                            data: row,
+                            url: '/interFeildDelete',
+                            success: function (data) {
+                                bootbox.alert("删除成功");
+                                $('#table').bootstrapTable('remove', {
+                                    field: 'Id',
+                                    values: [row.Id]
+                                });
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        return;
+                    }
+                }
+            });
     }
 };
 
