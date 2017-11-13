@@ -60,6 +60,7 @@ class intersMainHandler(tornado.web.RequestHandler):
 
 class ShareGameHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
+        intersMainHandler = intersMainHandler()
         fields = intersMainHandler.getInterFeilds()
         roomid=self.get_argument('roomid','0')
         peoples=self.get_argument('peoples','0')
