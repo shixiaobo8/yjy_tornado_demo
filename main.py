@@ -42,9 +42,9 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 class getInterData():
-    def getInterFeilds(self):
+    def getInterFeilds(self,json_file):
         res = dict()
-        file = self.application.settings['field_files']
+        file = json_file
         with open(file) as f:
             data = f.readlines()
         for d in data:
@@ -56,17 +56,17 @@ class getInterData():
 class intersMainHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         it = getInterData()
-        res = it.getInterFeilds()
+        res = it.getInterFeilds(self.application.settings['field_files'])
         self.finish(res)
     def post(self, *args, **kwargs):
         it = getInterData()
-        res = it.getInterFeilds()
+        res = it.getInterFeilds(self.application.settings['field_files'])
         self.finish(res)
 
 class ShareGameHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         it = getInterData()
-        fields = it.getInterFeilds()
+        fields = it.getInterFeilds(self.application.settings['field_files'])
         roomid=self.get_argument('roomid','0')
         peoples=self.get_argument('peoples','0')
         status = 'ok'
