@@ -41,13 +41,7 @@ class MainHandler(tornado.web.RequestHandler):
         self.write('aaaa')
 
 
-class intersMainHandler(tornado.web.RequestHandler):
-    def get(self, *args, **kwargs):
-        res = self.getInterFeilds()
-        self.finish(res)
-    def post(self, *args, **kwargs):
-        res = self.getInterFeilds()
-        self.finish(res)
+class getInterData():
     def getInterFeilds(self):
         res = dict()
         file = self.application.settings['field_files']
@@ -58,10 +52,21 @@ class intersMainHandler(tornado.web.RequestHandler):
             res[dkv['key']] = dkv['value']
         return res
 
+
+class intersMainHandler(tornado.web.RequestHandler):
+    def get(self, *args, **kwargs):
+        it = getInterData()
+        res = it.getInterFeilds()
+        self.finish(res)
+    def post(self, *args, **kwargs):
+        it = getInterData()
+        res = it.getInterFeilds()
+        self.finish(res)
+
 class ShareGameHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
-        intersMainHandler = intersMainHandler()
-        fields = intersMainHandler.getInterFeilds()
+        it = getInterData()
+        fields = it.getInterFeilds()
         roomid=self.get_argument('roomid','0')
         peoples=self.get_argument('peoples','0')
         status = 'ok'
